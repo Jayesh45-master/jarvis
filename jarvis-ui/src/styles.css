@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #000000 40%, #1e3a8a 100%);
+}
+
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+}
+
+.heading {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.5rem;
+  color: #ffaa00;
+  text-shadow: 0 0 15px #ffaa00, 0 0 30px #ffaa00, 0 0 50px #00aaff;
+  letter-spacing: 8px;
+  z-index: 10;
+  animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
