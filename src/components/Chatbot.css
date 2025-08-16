@@ -1,0 +1,448 @@
+.jarvis-chatbot {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #050a16;
+  border-left: 2px solid #00fff7;
+  position: relative;
+  box-shadow: none;
+  padding: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  overflow: visible; /* let header controls (Features pill) render fully */
+}
+
+.jarvis-chatbot-header {
+  font-size: 2.1rem;
+  font-family: 'Orbitron', sans-serif;
+  color: #00fff7;
+  text-align: left;
+  padding: 8px 16px; /* add top + horizontal space for header controls */
+  letter-spacing: 2px;
+  text-shadow: 0 0 16px #00fff7, 0 0 32px #00fff7;
+  font-weight: 700;
+  animation: jarvis-glow-pulse 2s infinite alternate;
+  min-height: 72px;
+  height: auto; /* let it grow if controls need more room */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+@keyframes jarvis-glow-pulse {
+  0% { text-shadow: 0 0 16px #00fff7, 0 0 32px #00fff7; }
+  100% { text-shadow: 0 0 32px #00fff7, 0 0 64px #00fff7; }
+}
+
+.jarvis-chatbot-messages {
+  flex: 1 1 auto;
+  overflow-y: auto; /* scroll messages, keep composer visible */
+  margin: 0;
+  padding: 12px 16px 96px; /* space on sides + bottom room for composer */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced message styling */
+.jarvis-chatbot-message {
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-family: 'Orbitron', sans-serif;
+  max-width: 80%;
+  box-shadow: 0 0 16px #00fff7;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  word-break: break-word;
+  position: relative;
+}
+
+.message-content {
+  margin-bottom: 8px;
+}
+
+.message-timestamp {
+  font-size: 0.8rem;
+  color: rgba(0, 255, 247, 0.6);
+  text-align: right;
+  font-style: italic;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #00fff7;
+}
+
+.dots {
+  animation: typingDots 1.5s infinite;
+}
+
+@keyframes typingDots {
+  0%, 20% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ChatGPT-like sticky composer wrapper */
+.chatgpt-composer {
+  position: sticky;
+  bottom: 0;
+  padding: 12px 16px; /* add horizontal padding so composer isn't stuck to edge */
+  background: linear-gradient(180deg, rgba(5,10,22,0) 0%, rgba(5,10,22,0.85) 35%, rgba(5,10,22,0.95) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  z-index: 5; /* ensure above messages */
+  pointer-events: auto;
+}
+
+/* Attach and voice buttons - minimalist, visible */
+.chatgpt-composer .attach-btn,
+.chatgpt-composer .voice-btn {
+  display: inline-flex !important;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #eafcff;
+}
+
+.chatgpt-composer .attach-btn:hover,
+.chatgpt-composer .voice-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* Keyboard focus and active press states */
+.chatgpt-composer .icon-btn:focus-visible,
+.chatgpt-composer .send-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,255,247,0.35), 0 0 18px rgba(0,255,247,0.25);
+  border-color: rgba(0,255,247,0.55);
+}
+
+.chatgpt-composer .icon-btn:active,
+.chatgpt-composer .send-btn:active {
+  transform: none; /* avoid shifting layout on press */
+}
+
+.chatgpt-composer .voice-btn.listening {
+  border-color: rgba(0, 255, 247, 0.55);
+  box-shadow: 0 0 0 2px rgba(0, 255, 247, 0.18);
+  background: rgba(0, 255, 247, 0.14);
+  color: #00fff7;
+}
+
+/* Inner rounded container */
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(12, 16, 28, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+
+.composer:focus-within {
+  border-color: rgba(0, 255, 247, 0.35);
+  box-shadow: 0 0 0 1px rgba(0, 255, 247, 0.25), 0 6px 26px rgba(0, 255, 247, 0.08);
+}
+
+/* Auto-resizing textarea */
+.composer-textarea {
+  flex: 1 1 auto;
+  max-height: 66px; /* ~3 lines; prevent growth */
+  min-height: 24px;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #eafcff;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 10px;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Orbitron', sans-serif;
+}
+
+/* Show only the last 5 messages to avoid any page growth */
+.jarvis-chatbot-messages .jarvis-chatbot-message:nth-last-child(n+6) {
+  display: none;
+}
+
+.jarvis-chatbot-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid rgba(136, 68, 255, 0.3);
+  border-radius: 25px;
+  background: rgba(10, 10, 20, 0.8);
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.jarvis-chatbot-input input:focus {
+  outline: none;
+  border-color: rgba(136, 68, 255, 0.8);
+  box-shadow: 0 0 20px rgba(136, 68, 255, 0.4);
+  background: rgba(10, 10, 20, 0.9);
+}
+
+.jarvis-chatbot-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.jarvis-chatbot-input input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.voice-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  color: #e6faff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.voice-btn:hover:not(:disabled) {
+  box-shadow: 0 0 25px rgba(255, 68, 170, 0.5);
+  background: linear-gradient(45deg, #8844ff, #ff44aa);
+}
+
+.voice-btn.listening {
+  animation: voicePulse 1.5s infinite;
+  border-color: rgba(255, 68, 68, 0.6);
+  box-shadow: 0 0 18px rgba(255, 68, 68, 0.35);
+}
+
+@keyframes voicePulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(255, 68, 68, 0.6); }
+  50% { box-shadow: 0 0 40px rgba(255, 68, 68, 0.8); }
+}
+
+.voice-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.jarvis-chatbot-input:not(.chatgpt-composer) button[type="submit"] {
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #8844ff, #44aaff);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(136, 68, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.jarvis-chatbot-input:not(.chatgpt-composer) button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(136, 68, 255, 0.5);
+  background: linear-gradient(45deg, #44aaff, #8844ff);
+}
+
+.jarvis-chatbot-input:not(.chatgpt-composer) button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.chatgpt-composer button:not(.icon-btn):not(.send-btn) {
+  background: transparent;
+  color: #e6faff;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  font-family: inherit;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.12s ease;
+}
+
+.icon-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.06); }
+
+.chatgpt-composer .composer .icon-btn,
+.chatgpt-composer .composer .send-btn {
+  background-clip: padding-box;
+  box-shadow: none;
+}
+
+/* Send button with arrow icon look */
+.send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(0, 255, 247, 0.22);
+  border: 1px solid rgba(0, 255, 247, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-btn .send-icon {
+  font-size: 16px;
+  color: #00fff7;
+  filter: drop-shadow(0 0 6px rgba(0,255,247,0.35));
+}
+
+/* Ensure icon visibility inside composer */
+.chatgpt-composer .icon-btn,
+.chatgpt-composer .send-btn {
+  color: #eafcff;
+}
+
+.chatgpt-composer .icon-btn svg,
+.chatgpt-composer .send-btn .send-icon svg {
+  display: block;
+}
+
+.send-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,255,247,0.35), 0 0 18px rgba(0,255,247,0.25);
+}
+
+.send-btn:hover:not(:disabled) { box-shadow: 0 0 18px rgba(0, 255, 247, 0.28); }
+
+.send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive: improve touch targets and spacing on small screens */
+@media (max-width: 640px) {
+  .chatgpt-composer { padding: 12px 14px; }
+  .composer { gap: 6px; padding: 8px 10px; border-radius: 16px; }
+  .chatgpt-composer .attach-btn,
+  .chatgpt-composer .voice-btn { width: 40px; height: 40px; border-radius: 10px; }
+  .send-btn { width: 40px; height: 40px; border-radius: 12px; }
+  .composer-textarea { font-size: 16px; line-height: 22px; padding: 8px; max-height: 160px; }
+}
+
+/* Prefer reduced motion: minimize transforms/animations */
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn,
+  .send-btn { transition: none; }
+  .voice-btn.listening { animation: none; }
+}
+
+/* Only apply hover lift on fine pointers */
+@media (hover: hover) and (pointer: fine) {
+  .icon-btn:hover:not(:disabled) { transform: none; }
+}
+
+.jarvis-chatbot-input:not(.chatgpt-composer) button {
+  padding: 12px 28px;
+  border-radius: 20px;
+  border: none;
+  background: #00fff7;
+  color: #0a1833;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 16px #00fff7;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-size: 1.1rem;
+}
+
+.jarvis-chatbot-input:not(.chatgpt-composer) button:hover:not(:disabled) {
+  background: #0a1833;
+  color: #00fff7;
+  box-shadow: 0 0 32px #00fff7, 0 0 64px #00fff7;
+}
+
+.jarvis-chatbot-message.bot {
+  align-self: flex-start;
+  background: rgba(0, 255, 247, 0.13);
+  color: #00fff7;
+  border: 1.5px solid #00fff7;
+}
+
+.jarvis-chatbot-message.user {
+  align-self: flex-end;
+  background: #00fff7;
+  color: #0a1833;
+  border: 1.5px solid #00fff7;
+  box-shadow: 0 0 32px #00fff7;
+}
+
+.jarvis-chatbot-message.bot:hover, .jarvis-chatbot-message.user:hover {
+  box-shadow: 0 0 32px #00fff7, 0 0 64px #00fff7;
+}
+
+/* Message animations */
+.jarvis-chatbot-message {
+  animation: messageSlideIn 0.3s ease-out;
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced scrollbar for messages */
+.jarvis-chatbot-messages::-webkit-scrollbar {
+  width: 8px;
+  background: #0a1833;
+}
+
+.jarvis-chatbot-messages::-webkit-scrollbar-thumb {
+  background: #00fff7;
+  border-radius: 4px;
+  box-shadow: 0 0 8px #00fff7;
+}
+
+.jarvis-chatbot-messages::-webkit-scrollbar-thumb:hover {
+  background: #00ffff;
+  box-shadow: 0 0 12px #00ffff;
+}
+
+.jarvis-chatbot-messages {
+  scrollbar-color: #00fff7 #0a1833;
+  scrollbar-width: thin;
+}
+
+.jarvis-chatbot-input button:hover:not(:disabled) {
+  background: #0a1833;
+  color: #00fff7;
+  box-shadow: 0 0 32px #00fff7, 0 0 64px #00fff7;
+  transform: scale(1.05);
+}

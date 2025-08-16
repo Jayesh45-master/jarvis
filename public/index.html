@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jarvis Core</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+  <script type="module">
+    import React from 'https://cdn.jsdelivr.net/npm/react@18/+esm';
+    import ReactDOM from 'https://cdn.jsdelivr.net/npm/react-dom@18/+esm';
+    import JarvisCore from './hologramOrb.jsx';
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<JarvisCore />);
+  </script>
+</body>
+</html>

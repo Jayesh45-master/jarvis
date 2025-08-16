@@ -1,0 +1,244 @@
+.jarvis-navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.jarvis-navbar-tabs {
+  display: flex;
+  background: rgba(0, 255, 247, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 0 10px #00fff7;
+  overflow: hidden;
+}
+
+.jarvis-navbar-tab {
+  padding: 12px 36px;
+  font-size: 1.2rem;
+  color: #00fff7;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 500;
+  pointer-events: auto;
+}
+
+.jarvis-navbar-tab.active, .jarvis-navbar-tab:hover {
+  background: #00fff7;
+  color: #0a1833;
+  text-shadow: 0 0 8px #00fff7;
+}
+
+.task-count {
+  background: rgba(0, 255, 247, 0.2);
+  color: #00fff7;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+}
+
+.jarvis-navbar-tab.active .task-count {
+  background: rgba(10, 24, 51, 0.3);
+  color: #0a1833;
+}
+
+.task-hover-card {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid rgba(0, 255, 247, 0.3);
+  border-radius: 16px;
+  padding: 16px;
+  min-width: 300px;
+  max-width: 400px;
+  box-shadow: 
+    0 12px 40px rgba(0, 255, 247, 0.15),
+    0 0 0 1px rgba(0, 255, 247, 0.2);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+  pointer-events: auto;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.hover-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 255, 247, 0.2);
+}
+
+.hover-card-header h4 {
+  margin: 0;
+  color: #00fff7;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #00fff7;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(0, 255, 247, 0.2);
+  transform: scale(1.1);
+}
+
+.no-tasks {
+  text-align: center;
+  color: #00ccff;
+  font-style: italic;
+  padding: 20px;
+}
+
+.hover-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.hover-task-item {
+  background: rgba(0, 255, 247, 0.05);
+  border: 1px solid rgba(0, 255, 247, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+
+.hover-task-item:hover {
+  background: rgba(0, 255, 247, 0.1);
+  border-color: rgba(0, 255, 247, 0.3);
+  transform: translateY(-1px);
+}
+
+.hover-task-item.overdue {
+  border-color: rgba(255, 68, 68, 0.3);
+  background: rgba(255, 68, 68, 0.05);
+}
+
+.task-header-mini {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.task-category-icon {
+  font-size: 16px;
+}
+
+.task-priority-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.task-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-title-mini {
+  color: #00fff7;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.task-desc-mini {
+  color: #00ccff;
+  font-size: 12px;
+  opacity: 0.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+}
+
+.task-date {
+  color: #00ccff;
+}
+
+.task-date.overdue {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.task-time {
+  color: #00fff7;
+}
+
+.more-tasks {
+  text-align: center;
+  color: #00ccff;
+  font-style: italic;
+  padding: 8px;
+  border-top: 1px solid rgba(0, 255, 247, 0.1);
+  margin-top: 4px;
+}
+
+/* Scrollbar styling for hover task list */
+.hover-task-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.hover-task-list::-webkit-scrollbar-track {
+  background: rgba(0, 255, 247, 0.1);
+  border-radius: 3px;
+}
+
+.hover-task-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 247, 0.3);
+  border-radius: 3px;
+}
+
+.hover-task-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 247, 0.5);
+}
