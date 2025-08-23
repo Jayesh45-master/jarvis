@@ -1,0 +1,38 @@
+{
+  "canisters": {
+    "ic-jarvis-backend": {
+      "build": "npx azle ic-jarvis-backend",
+      "candid": "src/ic-jarvis-backend/ic-jarvis-backend.did",
+      "gzip": true,
+      "main": "src/ic-jarvis-backend/src/index.ts",
+      "tech_stack": {
+        "cdk": {
+          "azle": {}
+        },
+        "language": {
+          "javascript": {},
+          "typescript": {}
+        }
+      },
+      "type": "custom",
+      "wasm": ".azle/ic-jarvis-backend/ic-jarvis-backend.wasm"
+    },
+    "ic-jarvis-frontend": {
+      "dependencies": [
+        "ic-jarvis-backend"
+      ],
+      "source": [
+        "src/ic-jarvis-frontend/assets"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
