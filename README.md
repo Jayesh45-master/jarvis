@@ -5,7 +5,7 @@ J.A.R.V.I.S is an AI-powered assistant that unifies all your productivity, creat
 
 <<<<<<< HEAD
 ### Landing Page
-![Landing Page](./jarvis-ui/screenshorts/landingpage.png)
+![Landing Page](./screenshorts/landingpage.png)
 
 ## FEATURE
 
@@ -19,16 +19,16 @@ J.A.R.V.I.S is an AI-powered assistant that unifies all your productivity, creat
 8. Modern UI with holographic orb animations and dark theme.
 
 ### Login Options
-![Login](./jarvis-ui/screenshots/login.png)
+![Login](./screenshorts/login.png)
 
 ### JARVIS Orb UI
-![JARVIS UI](./jarvis-ui/screenshots/jarvisui.png)
+![JARVIS UI](./screenshorts/jarvisui.png)
 
 ### Chat in Action
-![Chatbot](./jarvis-ui/screenshots/chatbot.png)
+![Chatbot](./screenshorts/chatbot.png)
 
 ### Task Scheduler
-![Task Scheduler](./jarvis-ui/screenshots/taskschuler.png)
+![Task Scheduler](./screenshorts/taskscheduler.png)
 
 
 ## TECH STAKE
