@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# J.A.R.V.I.S - Your AI assistant , Reimagined
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## INTRODUCTION
+J.A.R.V.I.S is an AI-powered assistant that unifies all your productivity, creativity, and smart home tools into one intelligent voice interface. Our mission is to simplify the future by bringing powerful AI and IoT technology together — private, personalized, and always within reach.You can chat with it, talk to it, and use it to control tasks or even smart devices.
 
-## Available Scripts
+### Landing Page
+![Landing Page](./jarvis-ui/screenshorts/landingpage.png)
 
-In the project directory, you can run:
+## FEATURE
 
-### `npm start`
+1. Conversational AI powered by OpenAI and Google Gemini APIs.
+2. Voice Assistant Mode – speak to JARVIS and hear it reply.
+3. User Authentication
+4. Login with Google, Microsoft, or Phone number.
+5. Chat History – conversations are stored so you can pick up where you left off.
+6. Task Scheduler – create and manage tasks via chat.
+7. IoT Integration (planned) – detect and connect with smart home devices.
+8. Modern UI with holographic orb animations and dark theme.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Login Options
+![Login](./jarvis-ui/screenshots/login.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### JARVIS Orb UI
+![JARVIS UI](./jarvis-ui/screenshots/jarvisui.png)
 
-### `npm test`
+### Chat in Action
+![Chatbot](./jarvis-ui/screenshots/chatbot.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Task Scheduler
+![Task Scheduler](./jarvis-ui/screenshots/taskschuler.png)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## TECH STAKE
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### FRONTEND
+React + TailwindCSS
+Framer Motion (animations)
+Shadcn UI Components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### BACKEND 
+Node.js + Express
+Passport.js for authentication
+MySQL / Neo4j for data storage
+OpenAI + Google Generative AI SDKs
 
-### `npm run eject`
+## PROJECT STRUCTURE
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+jarvis-main/
+│── README.md           # Documentation
+│── package.json        # Frontend dependencies
+│── jarvis-server/      # Backend (Express + DB + APIs)
+│   ├── index.js        # Server entry
+│   ├── db.js           # Database connection
+│   ├── config/         # Auth configs
+│   ├── controllers/    # API controllers
+│   ├── models/         # Database models
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## INSTALLATION
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### CLONE THE REPO
+git clone https://github.com/your-username/jarvis-main.git
+cd jarvis-main
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### INSTALL THE DEPENDICIES
 
-## Learn More
+Frontend
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Backend
+cd jarvis-server
+npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### SETTING UP THE ENVIRONMENT
 
-### Code Splitting
+Create a .env file in jarvis-server/ with:
+PORT=5000
+DB_URI=your_mysql_or_neo4j_connection_string
+OPENAI_API_KEY=your_openai_key
+GEMINI_API_KEY=your_google_gemini_key
+SESSION_SECRET=your_secret
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### RUN THE PROJECT
 
-### Analyzing the Bundle Size
+Backend
+cd jarvis-server
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Frontend
+cd jarvis-ui
+npm start
+Frontend runs at http://localhost:3000
+Backend runs at http://localhost:5000
 
-### Making a Progressive Web App
+## USAGE GUDE
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Open http://localhost:3000
+Sign up or login (Google/Microsoft/Phone).
+Click Launch Assistant to start the hologram orb.
+Use voice or text chat to talk to JARVIS.
+Create tasks, ask questions, or control devices.
 
-### Advanced Configuration
+## FUTURE ROADMAP
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. IoT-Intergration and Detection.
+2. More AI models support.
+3. Mobile app version.
+4. Multi-language voice support
+5. Smart calendar integration (Google/Outlook)
+6. Personalization (custom wake word, theme, voice)
+7. Plugin system for third-party integrations (Spotify, Weather, News)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
