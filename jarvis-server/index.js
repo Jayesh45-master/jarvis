@@ -11,10 +11,10 @@ const User = require('./models/User');          // Sequelize model definition
 
 const app = express();
 
-// Gemini AI Init
+// Gemini AI Init (Upgraded to Gemini 2.0 Flash 🚀)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ 
-  model: "gemini-1.5-pro-latest",
+  model: "gemini-2.0-flash",   // ⚡ faster + optimized for real-time tasks
   generationConfig: {
     temperature: 0.9,
     topP: 1,
@@ -47,7 +47,6 @@ sequelize.sync({ alter: true })  // or { force: true } for full wipe
 // Routes
 app.use('/auth', require('./routes/authroutes'));
 
-
 // Gemini Chat Endpoint
 app.post('/api/chat', async (req, res) => {
   try {
@@ -72,6 +71,23 @@ app.post('/api/chat', async (req, res) => {
       error: 'Error processing your message',
       details: error.message
     });
+  }
+});
+
+// Voice Command Endpoint
+app.post('/api/voice-command', async (req, res) => {
+  const { command } = req.body;
+
+  if (!command) return res.status(400).json({ error: 'Missing command' });
+
+  try {
+    const result = await model.generateContent(command);
+    const response = result.response.text();
+
+    res.json({ reply: response });
+  } catch (err) {
+    console.error("Voice processing error:", err);
+    res.status(500).json({ error: 'Failed to process command' });
   }
 });
 
