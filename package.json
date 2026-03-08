@@ -1,8 +1,12 @@
 {
-
-  "name": "jarvis-ui",
+  "name": "ic-jarvis",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "dependencies": {
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
@@ -23,9 +27,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "npm start --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "prebuild": "npm run prebuild --workspaces --if-present",
+    "pretest": "npm run prebuild --workspaces --if-present",
+    "test": "npm test --workspaces --if-present",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,22 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
-}
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
   },
-  "name": "ic-jarvis",
-  "scripts": {
-    "build": "npm run build --workspaces --if-present",
-    "prebuild": "npm run prebuild --workspaces --if-present",
-    "pretest": "npm run prebuild --workspaces --if-present",
-    "start": "npm start --workspaces --if-present",
-    "test": "npm test --workspaces --if-present"
-  },
-  "type": "module",
   "workspaces": [
     "src/ic-jarvis-backend"
   ]
-
+}
